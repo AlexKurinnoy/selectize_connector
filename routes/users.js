@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
         if (user){
                 res.json(user)
         }else{
-            res.send('-- Users does not exist')
+            res.send('-Users does not exist')
         }
     }).catch(err=>{
         res.send('error: ' + err)
