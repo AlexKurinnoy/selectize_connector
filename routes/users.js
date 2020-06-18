@@ -1,0 +1,45 @@
+const express = require("express")
+const router = express.Router()
+const cors = require("cors")
+const jwt = require("jsonwebtoken")
+const dbs = require("../db");
+
+const User = require("../models/user")
+process.env.SECRET_KEY = 'secret'
+
+router.use(cors())
+
+router.get('/', (req, res) => {
+    User.findAll().then(user => {
+        if (user){
+                res.json(user)
+        }else{
+            res.send('-- Users does not exist')
+        }
+    }).catch(err=>{
+        res.send('error: ' + err)
+    })
+})
+
+router.post('/login', (req, res) =>{
+    console.log(req.body)
+    User.findOne({
+        where: {
+            u_login: req.body.u_login
+        }
+    }).then(user => {
+        if(req.body.u_password === user.u_password){
+
+            jwt.sign(user.dataValues, process.env.SECRET_KEY, {expiresIn: 300}, (err, token)=>{
+                res.status(200).json({token: "Bearer " + token, u_role: user.u_role})
+            })
+
+        }else{
+            res.status(401).send({message: 'невірний пароль'})
+        }
+    }).catch(err =>{
+        res.status(401).send({ message: 'користувач відсутній'})
+    })
+})
+
+module.exports = router;
