@@ -11,9 +11,9 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 3903;
 const Users = require("./routes/users")
-const Data = require("./routes/data")
+// const Data = require("./routes/data")
 const User = require("./models/user")
-const Dat = require("./models/dat")
+// const Dat = require("./models/dat")
 // ---------------------------------
 
 // ______________________________
@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/api/auth", Users)
-app.use("/data", Data)
+// app.use("/data", Data)
 
 
 

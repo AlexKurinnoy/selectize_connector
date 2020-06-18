@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken")
 const dbs = require("../db");
 
 const User = require("../models/user")
+const Role = require("../models/role")
 process.env.SECRET_KEY = 'secret'
 
 router.use(cors())
@@ -29,10 +30,19 @@ router.post('/login', (req, res) =>{
         }
     }).then(user => {
         if(req.body.u_password === user.u_password){
-
-            jwt.sign(user.dataValues, process.env.SECRET_KEY, {expiresIn: 300}, (err, token)=>{
-                res.status(200).json({token: "Bearer " + token, u_role: user.u_role})
+            Role.findOne({
+                where: {
+                    r_id: user.u_role
+                }
+            }).then(role =>{
+                jwt.sign(user.dataValues, process.env.SECRET_KEY, {expiresIn: 300}, (err, token)=>{
+                    res.status(200).json({token: "Bearer " + token, role: {r_id: role.r_id,
+                                                                           r_name: role.r_name,
+                                                                           r_info: role.r_info,
+                                                                           r_date: role.r_date}})
+                })
             })
+
 
         }else{
             res.status(401).send({message: 'невірний пароль'})
