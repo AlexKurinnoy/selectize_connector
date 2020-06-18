@@ -36,10 +36,7 @@ router.post('/login', (req, res) =>{
                 }
             }).then(role =>{
                 jwt.sign(user.dataValues, process.env.SECRET_KEY, {expiresIn: 300}, (err, token)=>{
-                    res.status(200).json({token: "Bearer " + token, role: {r_id: role.r_id,
-                                                                           r_name: role.r_name,
-                                                                           r_info: role.r_info,
-                                                                           r_date: role.r_date}})
+                    res.status(200).json({token: "Bearer " + token, role: role.r_name})
                 })
             })
 
