@@ -25,7 +25,6 @@ router.get('/', ensureToken,  (req, res) => {
             }).catch(err=>{
                 res.send('error: ' + err)
             })
-
         }
     })
 })
