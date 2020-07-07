@@ -3,39 +3,35 @@ const Sequelize = require("sequelize");
 const db = require("../db")
 
 module.exports = db.sequelize.define(
-    'users',
+    'products',
     {
         id: {
             type: Sequelize.INTEGER,
             allowNull: false,
             primaryKey: true,
         },
-        login: {
+        name: {
             type: Sequelize.STRING
         },
-        role: {
+        code: {
+            type: Sequelize.STRING
+        },
+        client: {
             type: Sequelize.INTEGER
         },
-
-        name_full: {
+        number_invoice: {
             type: Sequelize.STRING
         },
-        password: {
+        date_invoice: {
             type: Sequelize.STRING
         },
-        blocked: {
-            type: Sequelize.BOOLEAN
-        },
-        info: {
+        cost_invoice: {
             type: Sequelize.STRING
         },
-        // registration: {
-        //     type: Sequelize.DATE
-        // },
+        createdAT: {
+            type: Sequelize.DATE
+        },
         username: {
-            type: Sequelize.STRING
-        },
-        temp_password: {
             type: Sequelize.STRING
         }
     },

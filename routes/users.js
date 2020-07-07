@@ -26,17 +26,17 @@ router.post('/login', (req, res) =>{
     console.log(req.body)
     User.findOne({
         where: {
-            u_login: req.body.u_login
+            login: req.body.login
         }
     }).then(user => {
-        if(req.body.u_password === user.u_password){
+        if(req.body.password === user.password){
             Role.findOne({
                 where: {
-                    r_id: user.u_role
+                    id: user.role
                 }
             }).then(role =>{
                 jwt.sign(user.dataValues, process.env.SECRET_KEY, {expiresIn: 300}, (err, token)=>{
-                    res.status(200).json({token: "Bearer " + token, role: role.r_name})
+                    res.status(200).json({token: "Bearer " + token, role: role.name})
                 })
             })
 

@@ -3,26 +3,21 @@ const Sequelize = require("sequelize");
 const db = require("../db")
 
 module.exports = db.sequelize.define(
-    'roles',
+    'tag_statuses',
     {
-        id: {
+        ts_id: {
             type: Sequelize.INTEGER,
             allowNull: false,
             primaryKey: true,
         },
-        name: {
+        ts_name: {
             type: Sequelize.STRING
         },
-        alias: {
-            type: Sequelize.STRING
+
+        ts_date: {
+            type: Sequelize.DATE
         },
-        info: {
-            type: Sequelize.STRING
-        },
-        // date: {
-        //     type: Sequelize.DATE
-        // },
-        username: {
+        ts_username: {
             type: Sequelize.STRING
         }
     },
