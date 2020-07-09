@@ -21,7 +21,7 @@ router.post('/', ensureToken,  (req, res) => {
             }).then( result => {
                 dbs.sequelize.query("SELECT p.id, p.name, p.code, p.client, p.number_invoice, p.date_invoice, p.cost_invoice, p.createdAT, p.username FROM `tags` `t` LEFT JOIN `products` `p` ON ((`t`.`product` = `p`.`id`)) where `t`.`status`=0")
                     .then((data) => {
-                        res.json(data[0])
+                        res.json({'message': 'sucsess', "products": data[0] })
                     })
             }).catch(err=>console.log(err))
 
