@@ -16,8 +16,18 @@ router.post('/', ensureToken,  (req, res) => {
         if(err){
             res.sendStatus(403)
         }else {
-            console.log(req)
-            res.json({'message': 'sucsess', "body_request": req.body })
+            Tags.update({ status: '2'},{
+                where: { product: req.body.id }
+            }).then( result => {
+                dbs.sequelize.query("SELECT p.id, p.name, p.code, p.client, p.number_invoice, p.date_invoice, p.cost_invoice, p.createdAT, p.username FROM `tags` `t` LEFT JOIN `products` `p` ON ((`t`.`product` = `p`.`id`)) where `t`.`status`=0")
+                    .then((data) => {
+                        res.json(data[0])
+                    })
+            }).catch(err=>console.log(err))
+
+
+                      // console.log(req)
+            // res.json({'message': 'sucsess', "body_request": req.body })
         }
     })
 })
