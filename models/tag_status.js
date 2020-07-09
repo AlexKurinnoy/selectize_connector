@@ -5,19 +5,18 @@ const db = require("../db")
 module.exports = db.sequelize.define(
     'tag_statuses',
     {
-        ts_id: {
+        id: {
             type: Sequelize.INTEGER,
             allowNull: false,
             primaryKey: true,
         },
-        ts_name: {
+        name: {
             type: Sequelize.STRING
         },
-
-        ts_date: {
+        date: {
             type: Sequelize.DATE
         },
-        ts_username: {
+        username: {
             type: Sequelize.STRING
         }
     },

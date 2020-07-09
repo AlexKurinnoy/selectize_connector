@@ -5,24 +5,24 @@ const db = require("../db")
 module.exports = db.sequelize.define(
     'tags',
     {
-        t_id: {
+        id: {
             type: Sequelize.INTEGER,
             allowNull: false,
             primaryKey: true,
         },
-        t_serial: {
+        serial: {
             type: Sequelize.STRING
         },
-        t_product: {
+        product: {
             type: Sequelize.STRING
         },
-        t_status: {
+        status: {
             type: Sequelize.INTEGER
         },
-        t_date: {
+        date: {
             type: Sequelize.DATE
         },
-        t_username: {
+        username: {
             type: Sequelize.STRING
         }
     },

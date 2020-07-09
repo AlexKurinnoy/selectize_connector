@@ -12,6 +12,7 @@ const app = express();
 const port = process.env.PORT || 3903;
 const Users = require("./routes/users")
 const Operators = require("./routes/operators")
+const Writer = require("./routes/writer")
 // const Data = require("./routes/data")
 const User = require("./models/user")
 // const Dat = require("./models/dat")
@@ -36,6 +37,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", Users)
 app.use("/api/operator", Operators)
+app.use("/api/record", Writer)
 
 // app.use("/data", Data)
 
