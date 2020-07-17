@@ -30,29 +30,34 @@ router.post('/', (req, res) =>{
             code: req.body.serial_number
         }
     }).then(product => {
-        // console.log(product)
+
+        if (product!=null)   {
+
             User.findOne({
                 where: {
                     login: req.body.login
                 }
             }).then(user =>{
                 console.log(user)
-                if(user == null){
+                    if(user == null){
 
-                    User.build({
-                        login: req.body.login,
-                        password: req.body.password
-                    }).save().then(ok=>{
-                        res.status(200).json(product)
-                    })
+                        User.build({
+                            login: req.body.login,
+                            password: req.body.password
+                        }).save().then(ok=>{
+                            res.status(200).json(product)
+                        })
 
-                }else {
-                    res.status(200).send({message: "Такий користувач вже є в системі, пройдіть авторизацію"})
-                }
+                    }else {
+                        res.status(200).send({message: "Такий користувач вже є в системі, пройдіть авторизацію"})
+                    }
+                }).catch(err=>{
+                    res.status(401).send({message: 'Невдача спідкала наших спортсменів'})
+                })
 
-            }).catch(err=>{
-                res.status(401).send({message: 'Невдача спідкала наших спортсменів'})
-            })
+        }else {
+            res.status(401).send({ message: 'Продукт відсутній'})
+        }
 
     }).catch(err =>{
         res.status(401).send({ message: 'Продукт відсутній'})
