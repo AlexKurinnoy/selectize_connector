@@ -36,7 +36,12 @@ router.post('/', (req, res) =>{
                     code: req.body.serial_number
                 }
             }).then(product =>{
-                res.status(200).json(product)
+                if (product!=null){
+                    res.status(200).json(product)
+                } else {
+                    res.status(401).send({message: 'невірний серійний номер'})
+                }
+
             })
 
 
