@@ -41,10 +41,7 @@ router.post('/', (req, res) =>{
                 } else {
                     res.status(401).send({message: 'невірний серійний номер'})
                 }
-
             })
-
-
         }else{
             res.status(401).send({message: 'невірний пароль'})
         }
